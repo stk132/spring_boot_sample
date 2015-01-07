@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<table>
+  <thead>
+    <tr>
+      <th>TWEET</th>
+    </tr>
+  </thead>
+  <tbody th:remove="all-but-first">
+    <tr th:each="status : ${list}" >
+      <td th:text="${status.tweet}"></td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>

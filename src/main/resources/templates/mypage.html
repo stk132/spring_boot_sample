@@ -9,11 +9,22 @@
           th:href="@{/css/bootstrap-theme.min.css}"/>
 </head>
 <body>
-	<h1>hello,world</h1>
-	 <p th:text="'こんにちは ' + ${name} + 'さん!'" />
-    <form action="sample" method="post">
-    	<input type="text" name="name" size="40"/>
-    	<input type="submit" value="送信"/>
+    <p th:text="'最新つぶやき: ' + ${text} + '!'" />
+    <form action="refreshMypage" method="post">
+    	<input type="text" name="tweet" size="40"/>
+    	<input type="submit" value="つぶやく"/>
     </form>
+    <table>
+		<thead>
+			<tr>
+				<th>TWEET</th>
+			</tr>
+		</thead>
+		<tbody th:remove="all-but-first">
+			<tr th:each="timeLine : ${timelineList}" >
+				<td th:text="${timeLine.text}"></td>
+			</tr>
+		</tbody>
+	</table>
 </body>
 </html>

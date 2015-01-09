@@ -1,8 +1,5 @@
 package jp.co.bizreach.spring_boot_sample;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,42 +11,26 @@ import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 
+/**
+ * @author bizreach.inc
+ */
 @Controller
 @RequestMapping("")
 public class TwitterController {
-    @RequestMapping("twitter1")
-    public String twitter1(Model model) throws TwitterException {
+
+    @RequestMapping("mypage")
+    public String mypage(Model model) throws TwitterException {
         Twitter twitter = new TwitterFactory().getInstance();
-        ResponseList<Status> timeline = twitter.getHomeTimeline();
-        //twitter.updateStatus("tabeさん");
-        model.addAttribute("text", timeline.get(0).getText());
-        return "twitter1";
+        ResponseList<Status> timeLineList = twitter.getHomeTimeline();
+        model.addAttribute("timelineList", timeLineList);
+        model.addAttribute("text", timeLineList.get(0).getText());
+        return "mypage";
     }
 
-    @RequestMapping("twitter2")
-    public String twitter2(@RequestParam(value = "tweet", required = true) String name) throws TwitterException {
+    @RequestMapping("refreshMypage")
+    public String refreshMypage(@RequestParam(value = "tweet", required = true) String name) throws TwitterException {
         Twitter twitter = new TwitterFactory().getInstance();
         twitter.updateStatus(name);
-        return "redirect:/twitter1";
-    }
-
-    @RequestMapping("twitter3")
-    public String twitter3(Model model) throws TwitterException {
-        List<MockStatus> list = new ArrayList<MockStatus>();
-        list.add(new MockStatus("aaaa"));
-        list.add(new MockStatus("bbbb"));
-        list.add(new MockStatus("cccc"));
-        list.add(new MockStatus("ddddd"));
-        list.add(new MockStatus("eeeee"));
-        model.addAttribute("list", list);
-        return "twitter3";
-    }
-
-    public class MockStatus {
-        public String tweet;
-
-        public MockStatus(String tweet) {
-            this.tweet = tweet;
-        }
+        return "redirect:/mypage";
     }
 }

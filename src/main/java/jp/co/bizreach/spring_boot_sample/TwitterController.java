@@ -10,9 +10,10 @@ import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
+import twitter4j.User;
 
 /**
- * @author bizreach.inc
+ * @author bizreach.Inc
  */
 @Controller
 @RequestMapping("")
@@ -22,6 +23,8 @@ public class TwitterController {
     public String mypage(Model model) throws TwitterException {
         Twitter twitter = new TwitterFactory().getInstance();
         ResponseList<Status> timeLineList = twitter.getHomeTimeline();
+        User user = twitter.verifyCredentials();
+        model.addAttribute("user", user);
         model.addAttribute("timelineList", timeLineList);
         model.addAttribute("text", timeLineList.get(0).getText());
         return "mypage";

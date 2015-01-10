@@ -7,21 +7,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- * @author bizreach.inc
+ * @author bizreach.Inc
  */
 @Controller
 @RequestMapping("")
 public class SampleController {
-	@RequestMapping("")
-	@ResponseBody
-	public String index(){
-		return "hello,world";
-	}
-	
-	@RequestMapping("sample")
-	public String sample(Model model,
-			@RequestParam(value="name", required = false, defaultValue = "World")String name){
-		model.addAttribute("name",name);
-		return "sample";
-	}
+    @RequestMapping("")
+    @ResponseBody
+    public String index() {
+        return "hello,world";
+    }
+
+    @RequestMapping("sample")
+    public String sample(Model model,
+            @RequestParam(value = "name", required = false, defaultValue = "World") String name) {
+        model.addAttribute("name", name);
+        return "sample";
+    }
 }

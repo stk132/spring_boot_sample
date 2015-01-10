@@ -30,8 +30,8 @@ public class TwitterController {
         return "mypage";
     }
 
-    @RequestMapping("refreshMypage")
-    public String refreshMypage(@RequestParam(value = "tweet", required = true) String name) throws TwitterException {
+    @RequestMapping("doTweet")
+    public String doTweet(@RequestParam(value = "tweet", required = true) String name) throws TwitterException {
         Twitter twitter = new TwitterFactory().getInstance();
         twitter.updateStatus(name);
         return "redirect:/mypage";
